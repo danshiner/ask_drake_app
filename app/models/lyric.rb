@@ -1,9 +1,11 @@
+require '../../config/environment' #TESTING ONLY, DELEE AFTERWARDS, SUPERFLUOUS 
+
 class Lyric < ActiveRecord::Base
 
   has_many :draketips
 
   validates :lyric,
-    presence: true, message: "Lyric required."
-    length: minimum: 5, maximum: 255, message: "Lyric must be between 5 and 255 characters."
+    presence: { message: "Lyric required." },
+    length: { minimum: 5, maximum: 255, message: "Lyric must be between 5 and 255 characters." }
 
 end

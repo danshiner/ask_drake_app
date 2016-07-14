@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160714200227) do
+ActiveRecord::Schema.define(version: 20160714214104) do
 
   create_table "drake_tips", force: :cascade do |t|
     t.integer  "user_id_id"
@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 20160714200227) do
     t.integer  "credits"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "has_received_rejection_message"
   end
 
 end

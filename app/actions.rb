@@ -19,16 +19,18 @@ post '/send_sms' do
 	to = params["to"] #DAN YOU CREATE THESE
 	message = params["body"] #DAN YOU CREATE THESE
 
-	client = Twilio::REST::Client.new(
-		ENV["TWILIO_ACCOUNT_SID"],
-		ENV["TWILIO_AUTH_TOKEN"]
+	account_sid = 'AC6533ddc2b095658337840937b068c062'
+	auth_token = '6a02e4987794c0ac52e40b35e1bf699a'
 
+	client = Twilio::REST::Client.new(
+		account_sid,
+		auth_token
 	)
 
 	client.messages.create(
 		to: to,
 		from: "+16477223749",
-		message: message
+		body: message
 		)
 
 end

@@ -8,11 +8,8 @@ class DrakeTip < ActiveRecord::Base
   validates :user_id, :lyric_id, 
     presence: { message: "Foreign keys required" }
 
-  def initialize
-
-  end
-
-  def parse
+  def parse(body)
+    
   end
 
   # Determine advice

@@ -1,3 +1,5 @@
+require '../config/environment' #TESTING ONLY, DELEE AFTERWARDS, SUPERFLUOUS 
+
 # Homepage (Root path)
 get '/' do
   @message = Message.new
@@ -9,8 +11,18 @@ end
 post '/receive_sms' do
 
   body = params[:Body]
+  phone_number = params[:From]
 
   # Evaluate User
+
+  @user = User.where(phone_number: phone_number)
+
+  if @user
+    @user.credits > 0 ? "Drakify him" : @user.reject
+  else
+    @user = User.new
+    puts "Drakify him"
+  end
 
 end
 

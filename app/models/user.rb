@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
   	User.where(phone_number: phone_number)
   end
 
-  def credits?
+  def reject
   	self.credits > 0
   end
 

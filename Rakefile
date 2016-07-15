@@ -11,3 +11,6 @@ namespace :db do
   end
 end
 
+
+# require evnviro in the rake file
+# create rake command db:seed in call you call a seed.rb

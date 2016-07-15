@@ -9,8 +9,8 @@ require 'sinatra/contrib/all' # Requires cookies, among other things
 
 # Load other key tools
 require 'twilio-ruby'
+require 'rmagick'
 
-# Models ---->>>>>>>>>>>>>>ARE THESE IN THE RIGHT PLACE??????????
 
 APP_ROOT = Pathname.new(File.expand_path('../../', __FILE__))
 APP_NAME = APP_ROOT.basename.to_s

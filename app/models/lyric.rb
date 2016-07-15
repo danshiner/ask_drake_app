@@ -1,10 +1,3 @@
-#FOR TESTING
-require 'rubygems'
-require 'bundler/setup'
-require 'active_support/all'
-require 'sinatra/activerecord'
-
-
 class Lyric < ActiveRecord::Base
 
   has_many :draketips

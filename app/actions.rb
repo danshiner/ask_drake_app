@@ -1,5 +1,3 @@
-require '../config/environment' #TESTING ONLY, DELEE AFTERWARDS, SUPERFLUOUS 
-
 # Homepage (Root path)
 get '/' do
   @message = Message.new

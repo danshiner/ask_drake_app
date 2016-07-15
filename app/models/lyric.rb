@@ -1,4 +1,9 @@
-require '../../config/environment' #TESTING ONLY, DELEE AFTERWARDS, SUPERFLUOUS 
+#FOR TESTING
+require 'rubygems'
+require 'bundler/setup'
+require 'active_support/all'
+require 'sinatra/activerecord'
+
 
 class Lyric < ActiveRecord::Base
 

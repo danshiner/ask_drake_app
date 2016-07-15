@@ -1,4 +1,8 @@
-require '../../config/environment' #TESTING ONLY, DELEE AFTERWARDS, SUPERFLUOUS
+#FOR TESTING
+require 'rubygems'
+require 'bundler/setup'
+require 'active_support/all'
+require 'sinatra/activerecord'
 
 class User < ActiveRecord::Base
 
@@ -14,7 +18,7 @@ class User < ActiveRecord::Base
   end
 
   def reject
-  	self.credits > 0
+  	puts "rejection!"
   end
 
 end

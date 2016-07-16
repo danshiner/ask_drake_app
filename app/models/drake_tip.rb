@@ -33,7 +33,7 @@ class DrakeTip < ActiveRecord::Base
 
   # Determine advice
   def get_lyric(keyword)
-    binding.pry
+    puts "lyrics: #{lyrics}, keyword: #{keyword}"
     lyrics = Lyric.where(category: keyword).all
     chosen_lyric = lyrics[rand(0..(lyrics.length - 1))] # Return a random row out of the set of matching lyrics
     chosen_lyric
@@ -46,7 +46,6 @@ class DrakeTip < ActiveRecord::Base
     def image_render(lyric)
       # 1. Read background image
       img = Magick::Image::read("./app/assets/background.png")[0]
-      binding.pry
       # 2. Create a new text
 
       caption = Magick::Image.read("caption:#{lyric}") {

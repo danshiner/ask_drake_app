@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
 
   validates :phone_number,
     presence: { message: "Phone number required." },
-    format: { with: /\+1\d{10}/, message: "Phone number not formatted correctly - must be +1##########" },
+    format: { with: /1\d{10}/, message: "Phone number not formatted correctly - must be 1##########" },
     uniqueness: true
 
   after_initialize :set_defaults

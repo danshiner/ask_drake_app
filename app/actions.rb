@@ -1,27 +1,12 @@
-# helpers do
-#
-#   # Gets tune from params[:id] or redirects to tune list
-#   def get_tune
-#     @tune = Tune.find_by(id: params[:id])
-#     redirect '/tunes' unless @tune
-#   end
-#
-# end
-
-
 # Homepage (Root path)
 
 get '/' do
 end
 
-# ngrok is only needed for /receive_sms, because it looks for the view. The rest can be done locally
-
 post '/receive_sms' do
 
   @user_question = params[:Body]
   @phone_number = params[:From]
-
-  # Evaluate User
 
   def drakify(user, question)
     draketip = DrakeTip.new
@@ -35,40 +20,46 @@ post '/receive_sms' do
     draketip.user_id = user.id
     draketip.lyric_id = lyric.id
     draketip.img_url = "/assets/draketips/draketip_#{draketip.id}"
-    draketip.save!
+    draketip
   end
 
   # Checks if the user exists; if so, stores in @user
   @user = User.where(phone_number: @phone_number)[0]
   if @user
-    @user.credits > 0 ? drakify(@user, @user_question) : "Have to build rejection method"
+    if @user.credits > 0
+      draketip = drakify(@user, @user_question)
+      draketip.save!
+      # post_request(draketip)
+      #Typhoeus.post("/send_sms", params: { draketip: "#{draketip.id}"})
+      redirect "/send_sms?draketip=#{draketip.id}"
+    else
+      "Have to build rejection method"
+    end
   else
-    @new_user = User.create(phone_number: @phone_number)
-    drakify(@new_user, @user_question)
+    # binding.pry
+    @new_user = User.create!(phone_number: @phone_number)
+    draketip = drakify(@new_user, @user_question)
+    draketip.save!
+    # post_request
+
+    #Typhoeus.post("/send_sms", params: { draketip: "#{draketip.id}"})
+    #Typhoeus.get("/send_sms")
+
+    redirect "/send_sms?draketip=#{draketip.id}"
   end
 
 end
 
-# Note: the following works
+# get '/send_sms' do
+#   puts "send is working"
+# end
 
-=begin
-post '/receive_sms' do
-  body = params[:Body]
-  content_type 'text/xml' #Note: may need to change this for MMS
-
-  response = Twilio::TwiML::Response.new do |r|
-  	r.Message "Thanks for messaging Drakebot, #{body}."
-  end
-
-  response.to_xml
-
-end
-=end
-
-=begin
-post '/send_sms' do
-  to = params["to"] #DAN YOU CREATE THESE
-  message = params["body"] #DAN YOU CREATE THESE
+get '/send_sms' do
+  @draketip = DrakeTip.find(params["draketip"])
+  @recipient = @draketip.user
+  to = @recipient.phone_number
+  draketip_url = @draketip.img_url
+  #message = params["body"]
 
   account_sid = 'AC6533ddc2b095658337840937b068c062'
   auth_token = '6a02e4987794c0ac52e40b35e1bf699a'
@@ -80,9 +71,28 @@ post '/send_sms' do
 
   client.messages.create(
     to: to,
-    from: "+16477223749",
-    body: message
+    from: "+16477223749", #can you change this?
+    #media_url: "https://hotlineping.herokuapp.com/#{draketip_url}",
+    body: "Hotling Ping:"
   )
 
 end
-=end
+
+#def post_request(draketip)
+
+  # HTTParty.post("/",
+  #   {
+  #     :body => { "amount" => "0.25", "platform" => "gittip", "username" => "whit537" }.to_json,
+  #     :basic_auth => { :username => api_key },
+  #     :headers => { 'Content-Type' => 'application/json' }
+  #    })
+
+  # request = Typhoeus::Request.new(
+  #   "/send_sms",
+  #   method: :post,
+  #   # body: "this is a request body",
+  #   params: { draketip: "#{draketip.id}" },
+  #   # headers: { Accept: "text/html" }
+  # )
+  # request.run
+#end

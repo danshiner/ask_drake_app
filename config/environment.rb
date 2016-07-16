@@ -10,6 +10,7 @@ require 'sinatra/contrib/all' # Requires cookies, among other things
 # Load other key tools
 require 'twilio-ruby'
 require 'rmagick'
+require 'typhoeus'
 
 
 APP_ROOT = Pathname.new(File.expand_path('../../', __FILE__))

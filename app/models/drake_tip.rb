@@ -53,8 +53,8 @@ class DrakeTip < ActiveRecord::Base
 
     # 3. Save new file
     caption.write("./draketip_#{id}.png")
-    puts "I am running, my friend!"
-    puts Dir.pwd
+    # puts "I am running, my friend!"
+    # puts Dir.pwd
 
   end
 

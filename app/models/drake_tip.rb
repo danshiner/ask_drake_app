@@ -3,34 +3,23 @@ class DrakeTip < ActiveRecord::Base
   belongs_to :user
   belongs_to :lyric
 
-  validates :user_id, :lyric_id, 
+  validates :user_id, :lyric_id,
     presence: { message: "Foreign keys required" }
 
-  def advise
-  
-    keyword = determine_keywords(body) #NEED TO GET BODY AS PARAM IN INITIALIZE
-    lyric = lookup(keyword)
-    image = image_render(lyric)
 
-    return image
-
-    # YOU ARE HERE! Key stuff is defined. Now have to figure out how to test and implement: populating/seeding, putting online 
-
-  end 
-
-  def determine_keywords(body)
+  def determine_keywords(user_question)
     case
-    when body.match(/what/i)
+    when user_question.match(/what/i)
       "what"
-    when body.match(/where/i)
+    when user_question.match(/where/i)
       "where"
-    when body.match(/when/i)
+    when user_question.match(/when/i)
       "when"
-    when body.match(/who/i)
+    when user_question.match(/who/i)
       "who"
-    when body.match(/why/i)
+    when user_question.match(/why/i)
       "why"
-    when body.match(/do\syou/i)
+    when user_question.match(/do\syou/i)
       "do you"
     else
       special_questions ? special_questions : "non-question"
@@ -38,20 +27,20 @@ class DrakeTip < ActiveRecord::Base
   end
 
   def special_questions
-    #conditions for special questions; if found one, return id of special answer, else return nil  
+    #conditions for special questions; if found one, return id of special answer, else return nil
   end
 
   # Determine advice
-  def lookup(keyword)
+  def get_lyric(keyword)
     lyrics = Lyric.where(category: keyword).all
-    lyrics[rand(0..(lyrics.length - 1))] # Return a random row of the matching lyrics   
+    chosen_lyric = lyrics[rand(0..(lyrics.length - 1))] # Return a random row out of the set of matching lyrics
+    chosen_lyric
   end
 
   # Turn into image
   def image_render(lyric)
-    
     # 1. Read background image
-    img = Magick::Image::read("../assets/background.png")[0] 
+    img = Magick::Image::read("./app/assets/background.png")[0]
 
     # 2. Create a new text
 
@@ -63,14 +52,10 @@ class DrakeTip < ActiveRecord::Base
     }[0]
 
     # 3. Save new file
-    caption.write("draketip_#{id}.png")
-    
+    caption.write("./draketip_#{id}.png")
+    puts "I am running, my friend!"
+    puts Dir.pwd
+
   end
 
 end
-
-
-
-
-
-    

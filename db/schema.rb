@@ -10,12 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160715193032) do
+ActiveRecord::Schema.define(version: 20160716001215) do
 
   create_table "drake_tips", force: :cascade do |t|
-    t.integer  "user_id_id"
-    t.integer  "lyric_id_id"
+    t.integer  "user_id"
+    t.integer  "lyric_id"
     t.datetime "created_at"
+    t.string   "img_url"
   end
 
   create_table "lyrics", force: :cascade do |t|

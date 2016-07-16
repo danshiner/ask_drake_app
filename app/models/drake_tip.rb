@@ -32,8 +32,8 @@ class DrakeTip < ActiveRecord::Base
 
   # Determine advice
   def get_lyric(keyword)
-    puts "lyrics: #{lyrics}, keyword: #{keyword}"
     lyrics = Lyric.where(category: keyword).all
+    puts "lyrics: #{lyrics}, keyword: #{keyword}"
     chosen_lyric = lyrics[rand(0..(lyrics.length - 1))] # Return a random row out of the set of matching lyrics
     chosen_lyric
   end

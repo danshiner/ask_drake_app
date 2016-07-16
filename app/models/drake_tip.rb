@@ -8,7 +8,6 @@ class DrakeTip < ActiveRecord::Base
 
 
   def determine_keywords(user_question)
-    binding.pry
     case
     when user_question.match(/what/i)
       "what"

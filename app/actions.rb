@@ -1,8 +1,10 @@
 # Homepage (Root path)
 
 get '/' do
+
 end
 
+# Twilio posts to /receive_sms when it receives text at 647-277-DRIZ
 post '/receive_sms' do
 
   @user_question = params[:Body]
@@ -36,23 +38,14 @@ post '/receive_sms' do
       "Have to build rejection method"
     end
   else
-    # binding.pry
     @new_user = User.create!(phone_number: @phone_number)
     draketip = drakify(@new_user, @user_question)
     draketip.save!
-    # post_request
-
-    #Typhoeus.post("/send_sms", params: { draketip: "#{draketip.id}"})
-    #Typhoeus.get("/send_sms")
-
     redirect "/send_sms?draketip=#{draketip.id}"
   end
 
 end
 
-# get '/send_sms' do
-#   puts "send is working"
-# end
 
 get '/send_sms' do
   @draketip = DrakeTip.find(params["draketip"])
@@ -71,7 +64,7 @@ get '/send_sms' do
 
   client.messages.create(
     to: to,
-    from: "+16477223749", #can you change this?
+    from: "+1647722DRIZ", #can you change this?
     #media_url: "https://hotlineping.herokuapp.com/#{draketip_url}",
     body: "Hotling Ping:"
   )

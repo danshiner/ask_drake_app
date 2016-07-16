@@ -39,22 +39,47 @@ class DrakeTip < ActiveRecord::Base
 
   # Turn into image
   def image_render(lyric)
+
+    # Turn into image
+    def image_render(lyric)
+      # 1. Read background image
+      img = Magick::Image::read("./app/assets/background.png")[0]
+      binding.pry
+      # 2. Create a new text
+
+      caption = Magick::Image.read("caption:#{lyric}") {
+        self.size = "200x300"
+        self.font = "Tahoma" #See for custom fonts: http://stackoverflow.com/questions/28043993/rmagick-unable-to-read-font
+        # self.gravity = NorthWestGravity # Not working, parking for now
+        self.pointsize = 30
+      }[0]
+
+      # 3. Save new file
+      caption.write("./draketip_#{id}.png")
+      # puts "I am running, my friend!"
+      # puts Dir.pwd
+
+    end
+
+
     # 1. Read background image
-    img = Magick::Image::read("./app/assets/background.png")[0]
 
-    # 2. Create a new text
-
-    caption = Magick::Image.read("caption:#{lyric}") {
-      self.size = "200x300"
-      self.font = "Tahoma" #See for custom fonts: http://stackoverflow.com/questions/28043993/rmagick-unable-to-read-font
-      # self.gravity = NorthWestGravity # Not working, parking for now
-      self.pointsize = 30
-    }[0]
-
-    # 3. Save new file
-    caption.write("./draketip_#{id}.png")
-    # puts "I am running, my friend!"
-    # puts Dir.pwd
+    # img = Magick::ImageList::read("./app/assets/background.png")
+    #
+    # # 2. Create a new text
+    # img << Magick::Image.read("caption:#{lyric}") {
+    #   self.size = "200x300"
+    #   self.font = "Tahoma" #See for custom fonts: http://stackoverflow.com/questions/28043993/rmagick-unable-to-read-font
+    #   # self.gravity = NorthWestGravity # Not working, parking for now
+    #   self.pointsize = 30
+    # }[0]
+    #
+    # # 3. Save new file
+    #
+    # #img << caption
+    # a = img.flatten_images
+    #
+    # a.write("./draketip_#{id}.png")
 
   end
 

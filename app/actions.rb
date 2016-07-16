@@ -1,7 +1,7 @@
 # Homepage (Root path)
 
 get '/' do
-  erb: index
+  erb :index
 end
 
 # Twilio posts to /receive_sms when it receives text at 647-277-DRIZ

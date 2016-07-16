@@ -8,6 +8,7 @@ class DrakeTip < ActiveRecord::Base
 
 
   def determine_keywords(user_question)
+    binding.pry
     case
     when user_question.match(/what/i)
       "what"
@@ -32,6 +33,7 @@ class DrakeTip < ActiveRecord::Base
 
   # Determine advice
   def get_lyric(keyword)
+    binding.pry
     lyrics = Lyric.where(category: keyword).all
     chosen_lyric = lyrics[rand(0..(lyrics.length - 1))] # Return a random row out of the set of matching lyrics
     chosen_lyric

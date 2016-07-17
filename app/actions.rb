@@ -33,7 +33,7 @@ post '/receive_sms' do
       draketip.save!
       # post_request(draketip)
       #Typhoeus.post("/send_sms", params: { draketip: "#{draketip.id}"})
-      redirect "/send_sms?draketip=#{draketip.id}"
+      redirect to("/send_sms?draketip=#{draketip.id}")
     else
       "Have to build rejection method"
     end
@@ -41,7 +41,7 @@ post '/receive_sms' do
     @new_user = User.create!(phone_number: @phone_number)
     draketip = drakify(@new_user, @user_question)
     draketip.save!
-    redirect "/send_sms?draketip=#{draketip.id}"
+    redirect to("/send_sms?draketip=#{draketip.id}")
   end
 
 end

@@ -52,7 +52,7 @@ post '/receive_sms' do
 
 end
 
-get '/send_sms' do
+post '/send_sms' do # Change to get when working with postman
   @draketip = DrakeTip.find(params["draketip"])
   @recipient = @draketip.user
   to = @recipient.phone_number
@@ -71,7 +71,7 @@ get '/send_sms' do
     to: to,
     from: "+1647722DRIZ", #can you change this?
     #media_url: "https://hotlineping.herokuapp.com/#{draketip_url}",
-    body: "Hotling Ping:",
+    #body: "Hotling Ping:",
     media_url: @draketip.img_url
   )
 

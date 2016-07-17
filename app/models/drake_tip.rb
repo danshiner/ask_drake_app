@@ -19,8 +19,8 @@ class DrakeTip < ActiveRecord::Base
       "who"
     when user_question.match(/why/i)
       "why"
-    when user_question.match(/do\syou/i)
-      "do you"
+    when user_question.match(/should/i)
+      "should"
     else
       special_questions ? special_questions : "non-question"
     end

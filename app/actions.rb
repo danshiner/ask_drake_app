@@ -13,15 +13,21 @@ post '/receive_sms' do
   def drakify(user, question)
     draketip = DrakeTip.new
 
-    # Process DrakeTip: look up keyword, match keyword to lyric, render image
+    # Note: the order below is necessary because image render needs user_id and lyric_id in place to store image name.
+
+    # Attach users foreign key
+    draketip.user_id = user.id
+
+    # Create lyric foreign key: determine keyword, look up lyric, attach lyrics foreign key
     keyword = draketip.determine_keywords(@user_question)
     lyric = draketip.get_lyric(keyword)
-    image = draketip.image_render(lyric.lyric)
-
-    # Define attributes of the newly created DrakeTip and save
-    draketip.user_id = user.id
     draketip.lyric_id = lyric.id
+
+    # Render image, store url
+    image = draketip.image_render(lyric.lyric)
     draketip.img_url = "./app/assets/draketips/draketip_#{draketip.user_id}_#{draketip.lyric_id}"
+
+    # Return draketip
     draketip
   end
 

@@ -46,7 +46,6 @@ post '/receive_sms' do
 
 end
 
-
 get '/send_sms' do
   @draketip = DrakeTip.find(params["draketip"])
   @recipient = @draketip.user

@@ -12,6 +12,7 @@ require 'twilio-ruby'
 require 'rmagick'
 require 'typhoeus'
 
+include Magick
 
 APP_ROOT = Pathname.new(File.expand_path('../../', __FILE__))
 APP_NAME = APP_ROOT.basename.to_s

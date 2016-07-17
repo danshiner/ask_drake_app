@@ -41,24 +41,28 @@ class DrakeTip < ActiveRecord::Base
   # Turn into image
   def image_render(lyric)
 
-    # 1. Read background image
-    img = ImageList.new('./app/assets/background.png')
+    # 1. Read background image (#read returns an array, so gets the .first item in it)
+    background = Magick::Image.read('./app/assets/background.png').first
 
     # 2. Create a new text
-    img << Magick::Image.read("caption:#{lyric}") {
-      self.size = "200x300"
-      self.font = "Tahoma" #See for custom fonts: http://stackoverflow.com/questions/28043993/rmagick-unable-to-read-font
+    caption = Magick::Image.read("caption:#{lyric}") {
+      self.size = "450x450"
+      self.font = "./app/assets/fonts/HelveticaNeue-MediumItalic.ttf" #See for custom fonts: http://stackoverflow.com/questions/28043993/rmagick-unable-to-read-font and http://www.simplesystems.org/RMagick/doc/draw.html
+      #self.font = "HelveticaNeue-BoldItalic" #See for custom fonts: http://stackoverflow.com/questions/28043993/rmagick-unable-to-read-font and http://www.simplesystems.org/RMagick/doc/draw.html
       #self.gravity = NorthWestGravity # Not working, parking for now
       self.pointsize = 30
       self.background_color = "none"
+      self.fill = "white"
+      # self.stroke = "white"
+      # self.stroke_width = 2
+      #self.page = Rectangle.new(450, 450, 100, 100)
     }.first
 
-    # 3. Save new file
+    # 3. Merge and position caption over background - see http://rmagick.rubyforge.org/src_over.html
+    merged = background.composite(caption, 25, 25, Magick::OverCompositeOp)
 
-    #img << caption
-    a = img.flatten_images
-
-    a.write("./draketip_#{id}.png")
+    merged.write("./draketip_#{id}.png")
+    #a.write("./draketip_#{id}.png")
 
   end
 

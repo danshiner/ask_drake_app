@@ -12,7 +12,7 @@ gem 'puma'
 gem 'tux'
 gem 'twilio-ruby'
 gem 'rmagick'
-gem 'typhoeus'
+gem 'typhoeus' # Delete if you don't end up using it
 
 # These gems are only installed when run as `bundle install --without production`
 group :development, :test do

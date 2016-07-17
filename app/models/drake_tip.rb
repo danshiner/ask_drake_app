@@ -58,7 +58,7 @@ class DrakeTip < ActiveRecord::Base
 
     # 3. Merge and position caption over background - see http://rmagick.rubyforge.org/src_over.html
     merged = background.composite(caption, 25, 25, Magick::OverCompositeOp)
-    merged.write("./app/assets/draketips/draketip_#{self.user_id}_#{self.lyric_id}.png")
+    merged.write("./public/draketips/draketip_#{self.user_id}_#{self.lyric_id}.png")
 
   end
 

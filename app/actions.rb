@@ -25,7 +25,7 @@ post '/receive_sms' do
 
     # Render image, store url
     image = draketip.image_render(lyric.lyric)
-    draketip.img_url = "./app/assets/draketips/draketip_#{draketip.user_id}_#{draketip.lyric_id}"
+    draketip.img_url = "https://hotlineping.herokuapp.com/draketips/draketip_#{draketip.user_id}_#{draketip.lyric_id}.png"
 
     # Return draketip
     draketip
@@ -52,7 +52,7 @@ post '/receive_sms' do
 
 end
 
-post '/send_sms' do
+get '/send_sms' do
   @draketip = DrakeTip.find(params["draketip"])
   @recipient = @draketip.user
   to = @recipient.phone_number
@@ -71,7 +71,8 @@ post '/send_sms' do
     to: to,
     from: "+1647722DRIZ", #can you change this?
     #media_url: "https://hotlineping.herokuapp.com/#{draketip_url}",
-    body: "Hotling Ping:"
+    body: "Hotling Ping:",
+    media_url: @draketip.img_url
   )
 
 end

@@ -21,7 +21,7 @@ post '/receive_sms' do
     # Define attributes of the newly created DrakeTip and save
     draketip.user_id = user.id
     draketip.lyric_id = lyric.id
-    draketip.img_url = "/assets/draketips/draketip_#{draketip.id}"
+    draketip.img_url = "./app/assets/draketips/draketip_#{draketip.user_id}_#{draketip.lyric_id}"
     draketip
   end
 

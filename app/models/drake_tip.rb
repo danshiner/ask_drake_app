@@ -48,21 +48,18 @@ class DrakeTip < ActiveRecord::Base
     caption = Magick::Image.read("caption:#{lyric}") {
       self.size = "450x450"
       self.font = "./app/assets/fonts/HelveticaNeue-MediumItalic.ttf" #See for custom fonts: http://stackoverflow.com/questions/28043993/rmagick-unable-to-read-font and http://www.simplesystems.org/RMagick/doc/draw.html
-      #self.font = "HelveticaNeue-BoldItalic" #See for custom fonts: http://stackoverflow.com/questions/28043993/rmagick-unable-to-read-font and http://www.simplesystems.org/RMagick/doc/draw.html
       #self.gravity = NorthWestGravity # Not working, parking for now
       self.pointsize = 30
       self.background_color = "none"
       self.fill = "white"
       # self.stroke = "white"
       # self.stroke_width = 2
-      #self.page = Rectangle.new(450, 450, 100, 100)
     }.first
 
     # 3. Merge and position caption over background - see http://rmagick.rubyforge.org/src_over.html
     merged = background.composite(caption, 25, 25, Magick::OverCompositeOp)
 
-    merged.write("./draketip_#{id}.png")
-    #a.write("./draketip_#{id}.png")
+    merged.write("./app/assets/draketips/draketip_#{self.user_id}_#{self.lyric_id}.png")
 
   end
 

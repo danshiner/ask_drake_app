@@ -37,8 +37,6 @@ post '/receive_sms' do
     if @user.credits > 0
       draketip = drakify(@user, @user_question)
       draketip.save!
-      # post_request(draketip)
-      #Typhoeus.post("/send_sms", params: { draketip: "#{draketip.id}"})
       redirect to("/send_sms?draketip=#{draketip.id}")
     else
       "Have to build rejection method"
@@ -69,9 +67,8 @@ post '/send_sms' do # Change to get when working with postman
 
   client.messages.create(
     to: to,
-    from: "+1647722DRIZ", #can you change this?
-    #media_url: "https://hotlineping.herokuapp.com/#{draketip_url}",
-    #body: "Hotling Ping:",
+    from: "+1647722DRIZ",
+    # body: "Hotling Ping",
     media_url: @draketip.img_url
   )
 

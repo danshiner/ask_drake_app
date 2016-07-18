@@ -6,7 +6,6 @@ class DrakeTip < ActiveRecord::Base
   validates :user_id, :lyric_id,
     presence: { message: "Foreign keys required" }
 
-
   def determine_keywords(user_question)
     case
     when user_question.match(/what/i)
@@ -42,14 +41,25 @@ class DrakeTip < ActiveRecord::Base
   def image_render(lyric)
 
     # 1. Read background image (#read returns an array, so gets the .first item in it)
-    background = Magick::Image.read('./app/assets/background.png').first
+    background = Magick::Image.read("./app/assets/background_#{rand(1..4)}.png").first
 
     # 2. Create a new text
-    caption = Magick::Image.read("caption:#{lyric}") {
+    advice = Magick::Image.read("caption:#{lyric}") {
       self.size = "450x450"
+      self.font = "./app/assets/fonts/HelveticaNeue-BoldItalic.ttf" #See for custom fonts: http://stackoverflow.com/questions/28043993/rmagick-unable-to-read-font and http://www.simplesystems.org/RMagick/doc/draw.html
+      #self.gravity = NorthWestGravity # Not working, parking for now
+      self.pointsize = 35
+      self.background_color = "none"
+      self.fill = "white"
+      # self.stroke = "white"
+      # self.stroke_width = 2
+    }.first
+
+    counter = Magick::Image.read("caption:647.277.DRIZ / HOTLINE PING NO.#{100000+id.to_i} / MADE IN THE 6 BY A FAN, NOT THE REAL DRAKE") {
+      self.size = "450x30"
       self.font = "./app/assets/fonts/HelveticaNeue-MediumItalic.ttf" #See for custom fonts: http://stackoverflow.com/questions/28043993/rmagick-unable-to-read-font and http://www.simplesystems.org/RMagick/doc/draw.html
       #self.gravity = NorthWestGravity # Not working, parking for now
-      self.pointsize = 30
+      self.pointsize = 10
       self.background_color = "none"
       self.fill = "white"
       # self.stroke = "white"
@@ -57,8 +67,9 @@ class DrakeTip < ActiveRecord::Base
     }.first
 
     # 3. Merge and position caption over background - see http://rmagick.rubyforge.org/src_over.html
-    merged = background.composite(caption, 25, 25, Magick::OverCompositeOp)
-    merged.write("./public/draketips/draketip_#{self.user_id}_#{self.lyric_id}.png")
+    merged_step1 = background.composite(advice, 25, 25, Magick::OverCompositeOp)
+    merged_step2 = merged_step1.composite(counter, 25, 475, Magick::OverCompositeOp)
+    merged_step2.write("./public/draketips/draketip_#{self.user_id}_#{self.lyric_id}.png")
 
   end
 

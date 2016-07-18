@@ -55,7 +55,7 @@ class DrakeTip < ActiveRecord::Base
       # self.stroke_width = 2
     }.first
 
-    counter = Magick::Image.read("caption:647.277.DRIZ / HOTLINE PING NO.#{100000+id.to_i} / MADE IN THE 6 BY A FAN, NOT THE REAL DRAKE") {
+    counter = Magick::Image.read("caption:647.722.DRIZ / HOTLINE PING NO.#{100000+id.to_i} / MADE IN THE 6 BY A FAN, NOT THE REAL DRAKE") {
       self.size = "450x30"
       self.font = "./app/assets/fonts/HelveticaNeue-MediumItalic.ttf" #See for custom fonts: http://stackoverflow.com/questions/28043993/rmagick-unable-to-read-font and http://www.simplesystems.org/RMagick/doc/draw.html
       #self.gravity = NorthWestGravity # Not working, parking for now

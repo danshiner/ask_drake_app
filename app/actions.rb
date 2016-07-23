@@ -19,7 +19,7 @@ post '/receive_sms' do
     draketip.user_id = user.id
 
     # Create lyric foreign key: determine keyword, look up lyric, attach lyrics foreign key
-    keyword = draketip.determine_keywords(@user_question)
+    keyword = draketip.determine_keywords(question)
     lyric = draketip.get_lyric(keyword)
     draketip.lyric_id = lyric.id
 
@@ -35,17 +35,21 @@ post '/receive_sms' do
   @user = User.where(phone_number: @phone_number)[0]
   if @user
     if @user.credits > 0
-      draketip = drakify(@user, @user_question)
-      draketip.save!
-      redirect to("/send_sms?draketip=#{draketip.id}")
+      @draketip = drakify(@user, @user_question)
+      @draketip.save!
+      Question.create(question: @user_question, user_id: @user.id, drake_tip_id: @draketip.id)
+      #redirect to("/send_sms?draketip=#{draketip.id}")
     else
+      Question.create(question: @user_question, user_id: @user.id, drake_tip_id: nil)
       "Have to build rejection method"
     end
+
   else
-    @new_user = User.create!(phone_number: @phone_number)
-    draketip = drakify(@new_user, @user_question)
-    draketip.save!
-    redirect to("/send_sms?draketip=#{draketip.id}")
+    @new_user = User.create(phone_number: @phone_number)
+    @draketip = drakify(@new_user, @user_question)
+    @draketip.save!
+    Question.create(question: @user_question, user_id: @new_user.id, drake_tip_id: @draketip.id)
+    #redirect to("/send_sms?draketip=#{draketip.id}")
   end
 
 end
@@ -73,22 +77,3 @@ post '/send_sms' do # Change to get when working with postman
   )
 
 end
-
-#def post_request(draketip)
-
-  # HTTParty.post("/",
-  #   {
-  #     :body => { "amount" => "0.25", "platform" => "gittip", "username" => "whit537" }.to_json,
-  #     :basic_auth => { :username => api_key },
-  #     :headers => { 'Content-Type' => 'application/json' }
-  #    })
-
-  # request = Typhoeus::Request.new(
-  #   "/send_sms",
-  #   method: :post,
-  #   # body: "this is a request body",
-  #   params: { draketip: "#{draketip.id}" },
-  #   # headers: { Accept: "text/html" }
-  # )
-  # request.run
-#end

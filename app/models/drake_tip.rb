@@ -6,6 +6,8 @@ class DrakeTip < ActiveRecord::Base
   validates :user_id, :lyric_id,
     presence: { message: "Foreign keys required" }
 
+  
+
   def determine_keywords(user_question)
     case
     when user_question.match(/what/i)

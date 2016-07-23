@@ -6,6 +6,7 @@ class DrakeTip < ActiveRecord::Base
   validates :user_id, :lyric_id,
     presence: { message: "Foreign keys required" }
 
+  after_save :remove_credit_from_user
 
   def determine_keywords(user_question)
     case
@@ -72,6 +73,13 @@ class DrakeTip < ActiveRecord::Base
     merged_step2 = merged_step1.composite(counter, 25, 475, Magick::OverCompositeOp)
     merged_step2.write("./public/draketips/draketip_#{self.user_id}_#{self.lyric_id}.png")
 
+  end
+
+  def remove_credit_from_user
+    binding.pry
+    @user = User.find(self.user_id)
+    @user.credits -= 1
+    @user.save!
   end
 
 end

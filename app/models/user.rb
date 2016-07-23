@@ -2,7 +2,7 @@
 
 class User < ActiveRecord::Base
 
-@@CREDITS = 1
+@@CREDITS = 3
 
   has_many :drake_tips
 

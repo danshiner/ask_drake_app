@@ -76,7 +76,6 @@ class DrakeTip < ActiveRecord::Base
   end
 
   def remove_credit_from_user
-    binding.pry
     @user = User.find(self.user_id)
     @user.credits -= 1
     @user.save!

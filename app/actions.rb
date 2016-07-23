@@ -38,7 +38,7 @@ post '/receive_sms' do
       @draketip = drakify(@user, @user_question)
       @draketip.save!
       Question.create(question: @user_question, user_id: @user.id, drake_tip_id: @draketip.id)
-      #redirect to("/send_sms?draketip=#{draketip.id}")
+      redirect to("/send_sms?draketip=#{draketip.id}")
     else
       Question.create(question: @user_question, user_id: @user.id, drake_tip_id: nil)
       "Have to build rejection method"
@@ -49,7 +49,7 @@ post '/receive_sms' do
     @draketip = drakify(@new_user, @user_question)
     @draketip.save!
     Question.create(question: @user_question, user_id: @new_user.id, drake_tip_id: @draketip.id)
-    #redirect to("/send_sms?draketip=#{draketip.id}")
+    redirect to("/send_sms?draketip=#{draketip.id}")
   end
 
 end

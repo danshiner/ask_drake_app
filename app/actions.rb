@@ -4,6 +4,9 @@ get '/' do
   erb :index
 end
 
+post '/receive_tweet' do
+end
+
 # Twilio posts to /receive_sms when it receives text at 647-277-DRIZ
 post '/receive_sms' do
 
@@ -11,7 +14,7 @@ post '/receive_sms' do
   @phone_number = params[:From]
 
   def drakify(user, question)
-    draketip = DrakeTip.new
+    draketip = DrakeTip.create
 
     # Note: the order below is necessary because image render needs user_id and lyric_id in place to store image name.
 
@@ -32,25 +35,28 @@ post '/receive_sms' do
   end
 
   # Checks if the user exists; if so, stores in @user
-  @user = User.where(phone_number: @phone_number)[0]
-  if @user
+  @user = User.where(phone_number: @phone_number)[0] || User.create(phone_number: @phone_number)
+
     if @user.credits > 0
       @draketip = drakify(@user, @user_question)
       @draketip.save!
       Question.create(question: @user_question, user_id: @user.id, drake_tip_id: @draketip.id)
-      redirect to("/send_sms?draketip=#{@draketip.id}")
+      @user.credits -= 1
+      @user.save
+      #redirect to("/send_sms?draketip=#{@draketip.id}")
     else
+      # If insufficient credits, store message to the database but do not send a DrakeTip.
       Question.create(question: @user_question, user_id: @user.id, drake_tip_id: nil)
-      "Have to build rejection method"
+      puts "User #{@user.id} does not have sufficient credits to receive a draketip."
     end
 
-  else
-    @new_user = User.create(phone_number: @phone_number)
-    @draketip = drakify(@new_user, @user_question)
-    @draketip.save!
-    Question.create(question: @user_question, user_id: @new_user.id, drake_tip_id: @draketip.id)
-    redirect to("/send_sms?draketip=#{@draketip.id}")
-  end
+  # else
+  #   @new_user = User.create(phone_number: @phone_number)
+  #   @draketip = drakify(@new_user, @user_question)
+  #   @draketip.save!
+  #   Question.create(question: @user_question, user_id: @new_user.id, drake_tip_id: @draketip.id)
+  #   redirect to("/send_sms?draketip=#{@draketip.id}")
+  # end
 
 end
 

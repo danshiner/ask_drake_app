@@ -18,8 +18,10 @@ class User < ActiveRecord::Base
   end
 
   def set_defaults
-    self.credits = @@CREDITS
-    self.has_received_rejection_message = false
+    if self.new_record?
+      self.credits = @@CREDITS
+      self.has_received_rejection_message = false
+    end
   end
 
 end

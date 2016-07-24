@@ -3,10 +3,10 @@ class DrakeTip < ActiveRecord::Base
   belongs_to :user
   belongs_to :lyric
 
-  validates :user_id, :lyric_id,
-    presence: { message: "Foreign keys required" }
+  # validates :user_id, :lyric_id,
+  #   presence: { message: "Foreign keys required" }
 
-  after_save :remove_credit_from_user
+  # after_save :remove_credit_from_user
 
   def determine_keywords(user_question)
     case
@@ -56,8 +56,8 @@ class DrakeTip < ActiveRecord::Base
       # self.stroke = "white"
       # self.stroke_width = 2
     }.first
-
-    counter = Magick::Image.read("caption:647.722.DRIZ / HOTLINE PING NO.#{100000+id.to_i} / MADE IN THE 6 BY A FAN, NOT THE REAL DRAKE") {
+    binding.pry
+    counter = Magick::Image.read("caption:647.722.DRIZ / HOTLINE PING NO.#{100000+self.id} / MADE IN THE 6 BY A FAN, NOT THE REAL DRAKE") {
       self.size = "450x30"
       self.font = "./app/assets/fonts/HelveticaNeue-MediumItalic.ttf" #See for custom fonts: http://stackoverflow.com/questions/28043993/rmagick-unable-to-read-font and http://www.simplesystems.org/RMagick/doc/draw.html
       #self.gravity = NorthWestGravity # Not working, parking for now
@@ -71,14 +71,13 @@ class DrakeTip < ActiveRecord::Base
     # 3. Merge and position caption over background - see http://rmagick.rubyforge.org/src_over.html
     merged_step1 = background.composite(advice, 25, 25, Magick::OverCompositeOp)
     merged_step2 = merged_step1.composite(counter, 25, 475, Magick::OverCompositeOp)
-    merged_step2.write("./public/draketips/draketip_#{self.user_id}_#{self.lyric_id}.png")
+    merged_step2.write("./public/draketips/draketip_#{100000+self.id}.png")
 
   end
 
-  def remove_credit_from_user
-    @user = User.find(self.user_id)
-    @user.credits -= 1
-    @user.save!
-  end
+  # def remove_credit_from_user
+  #   self.user.credits -= 1
+  #   self.user.save!
+  # end
 
 end

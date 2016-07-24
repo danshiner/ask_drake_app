@@ -10,7 +10,7 @@ require 'sinatra/contrib/all' # Requires cookies, among other things
 # Load other key tools
 require 'twilio-ruby'
 require 'rmagick'
-require 'typhoeus'
+require 'chatterbot/dsl'
 
 include Magick # Necessary?
 

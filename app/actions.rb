@@ -28,7 +28,7 @@ post '/receive_sms' do
 
     # Render image, store url
     image = draketip.image_render(lyric.lyric)
-    draketip.img_url = "https://hotlineping.herokuapp.com/draketips/draketip_#{draketip.user_id}_#{draketip.lyric_id}.png"
+    draketip.img_url = "https://hotlineping.herokuapp.com/draketips/draketip_#{100000+draketip.id}.png"
 
     # Return draketip
     draketip

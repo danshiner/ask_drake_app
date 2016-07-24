@@ -43,7 +43,7 @@ post '/receive_sms' do
       Question.create(question: @user_question, user_id: @user.id, drake_tip_id: @draketip.id)
       @user.credits -= 1
       @user.save
-      #redirect to("/send_sms?draketip=#{@draketip.id}")
+      redirect to("/send_sms?draketip=#{@draketip.id}")
     else
       # If insufficient credits, store message to the database but do not send a DrakeTip.
       Question.create(question: @user_question, user_id: @user.id, drake_tip_id: nil)

@@ -126,7 +126,7 @@ PLATFORMS
 
 DEPENDENCIES
   activesupport
-  chatterbot (~> 2.0, >= 2.0.2)
+  chatterbot
   pg
   pry
   puma

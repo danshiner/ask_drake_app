@@ -91,14 +91,15 @@ post '/receive_sms' do #Change to receive question for production
     # Send the message; action is dependent on platform
     case @platform
     when nil #Twilio does not send a params[:Platform], so this is for Twilio
-      account_sid = 'AC6533ddc2b095658337840937b068c062'
-      auth_token = '6a02e4987794c0ac52e40b35e1bf699a'
-      client = Twilio::REST::Client.new(account_sid, auth_token)
-      client.messages.create(
-        to: @user.phone_number,
-        from: "+1647722DRIZ",
-        media_url: @draketip.img_url
-      )
+      puts @draketip.lyric.lyric
+      # account_sid = 'AC6533ddc2b095658337840937b068c062'
+      # auth_token = '6a02e4987794c0ac52e40b35e1bf699a'
+      # client = Twilio::REST::Client.new(account_sid, auth_token)
+      # client.messages.create(
+      #   to: @user.phone_number,
+      #   from: "+1647722DRIZ",
+      #   media_url: @draketip.img_url
+      # )
 
     when "twitter"
       file_location = @draketip.img_url.slice!("https://hotlineping.herokuapp.com/")

@@ -1,0 +1,16 @@
+insert into lyrics (id,lyric,category) values (1, 'where lyric', 'where');
+insert into lyrics (id,lyric,category) values (2, 'what is lyric', 'what is');
+insert into lyrics (id,lyric,category) values (3, 'toronto lyric', 'toronto');
+insert into lyrics (id,lyric,category) values (4, 'girl lyric', 'girl');
+insert into lyrics (id,lyric,category) values (5, 'money lyric', 'money');
+insert into lyrics (id,lyric,category) values (6, 'vishal lyric', 'pokemon');
+insert into lyrics (id,lyric,category) values (7, 'WU lyric', 'what’s up');
+insert into lyrics (id,lyric,category) values (8, 'HAY lyric', 'how are you');
+insert into lyrics (id,lyric,category) values (9, 'what is lyric', 'what is');
+insert into lyrics (id,lyric,category) values (10, 'what was lyric', 'what was');
+insert into lyrics (id,lyric,category) values (11, 'what will lyric', 'what will');
+insert into lyrics (id,lyric,category) values (12, 'should lyric', 'should');
+insert into lyrics (id,lyric,category) values (13, 'will lyric', 'will');
+insert into lyrics (id,lyric,category) values (14, 'non q lyric', 'non-question');
+insert into lyrics (id,lyric,category) values (15, 'how lyric', 'how');
+insert into lyrics (id,lyric,category) values (16, 'what lyric', 'what');

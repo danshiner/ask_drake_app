@@ -6,12 +6,37 @@ class DrakeTip < ActiveRecord::Base
   # validates :user_id, :lyric_id,
   #   presence: { message: "Foreign keys required" }
 
-  # after_save :remove_credit_from_user
-
   def determine_keywords(user_question)
+
     case
+    # Special situations
+    when user_question.match(/toronto/i) || user_question.match(/the\s6/i) || user_question.match(/the\s6/i) || user_question.match(/the\ssix/i)
+      "toronto"
+    when user_question.match(/food/i) || user_question.match(/eat/i) || user_question.match(/breakfast/i) || user_question.match(/lunch/i) || user_question.match(/dinner/i)
+      "food"
+    when user_question.match(/girl/i) || user_question.match(/love/i) || user_question.match(/woman/i)
+      "love"
+    when user_question.match(/money/i)
+      "money"
+    when user_question.match(/vishal/i)
+      "vishal"
+    when user_question.match(/pokemon/i)
+      "pokemon"
+    when user_question.match(/what's\sup/i) || user_question.match(/what's\sgoing\son/i) || user_question.match(/whats\ares\you/i)
+      "vishal"
+    when user_question.match(/hows\ares\you/i) || user_question.match(/hows\ares\u/i) || user_question.match(/hows\rs\u/i)
+      "how are you"
+    # Main question words
     when user_question.match(/what/i)
       "what"
+    when user_question.match(/what\sis/i)
+      "what is"
+    when user_question.match(/what\swas/i)
+      "what was"
+    when user_question.match(/what\swill/i)
+      "what will"
+    when user_question.match(/what\sshould/i)
+      "what should"
     when user_question.match(/where/i)
       "where"
     when user_question.match(/when/i)
@@ -20,15 +45,15 @@ class DrakeTip < ActiveRecord::Base
       "who"
     when user_question.match(/why/i)
       "why"
-    when user_question.match(/should/i)
+    when user_question.match(/^should/i)
       "should"
+    when user_question.match(/will/i)
+      "will"
+    when user_question.match(/how/i)
+      "how"
     else
-      special_questions ? special_questions : "non-question"
+      "non-question"
     end
-  end
-
-  def special_questions
-    #conditions for special questions; if found one, return id of special answer, else return nil
   end
 
   # Determine advice

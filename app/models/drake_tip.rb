@@ -51,8 +51,8 @@ class DrakeTip < ActiveRecord::Base
       "will"
     when user_question.match(/how/i)
       "how"
-    when user_question.match(/^I was wishing for some things$/i)
-      "gold"
+    # when user_question.match(/^I was wishing for some things$/i)
+    #   "gold"
     else
       "non-question"
     end

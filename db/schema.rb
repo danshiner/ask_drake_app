@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160723173728) do
+ActiveRecord::Schema.define(version: 20160724235720) do
 
   create_table "drake_tips", force: :cascade do |t|
     t.integer  "user_id"
@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 20160723173728) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "has_received_rejection_message"
+    t.string   "twitter_username"
   end
 
 end

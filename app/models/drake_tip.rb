@@ -70,7 +70,7 @@ class DrakeTip < ActiveRecord::Base
   def image_render(lyric)
 
     # 1. Read background image (#read returns an array, so gets the .first item in it)
-    if lyric = "Golden ping unlocked! You will be contacted shortly to receive unlimited pings. Versace Versace Versace!"
+    if lyric == "Golden ping unlocked! You will be contacted shortly to receive unlimited pings. Versace Versace Versace!"
       background = Magick::Image.read("./app/assets/background_gold.png").first
     else
       background = Magick::Image.read("./app/assets/background_#{rand(1..4)}.png").first

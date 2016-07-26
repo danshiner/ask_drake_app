@@ -28,6 +28,7 @@ get '/' do
   erb :index
 end
 
+
 # Twilio posts to /receive_sms when it receives text at 647-277-DRIZ
 post '/receive_sms' do #Change to receive question for production
 
@@ -50,7 +51,7 @@ post '/receive_sms' do #Change to receive question for production
     draketip
   end
 
-  # Identify source
+  # Identify source - Sender.identify_source --> I can delete this!
   def identify_source
     case params[:source]
     when "twitter"
@@ -63,10 +64,10 @@ post '/receive_sms' do #Change to receive question for production
   # Receive input from user
   @user_question = params[:Body]
   @sender = params[:From]
-  @platform = params[:Platform]
+  @platform = params[:Platform] # --> I can delete this!
   # @phone_number = params[:From]
 
-  # Based on platform, checks if user exists; if yes, stores in @user; if not, creates a new user
+  # Based on platform, checks if user exists; if yes, stores in @user; if not, creates a new user - Sender.check_if_new_user
   case @platform
   when nil #Twilio does not send a params[:Platform], so this is for Twilio
     @user = User.where(phone_number: @sender)[0] || User.create(phone_number: @sender)

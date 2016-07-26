@@ -22,7 +22,7 @@ class DrakeTip < ActiveRecord::Base
       "vishal"
     when user_question.match(/pokemon/i)
       "pokemon"
-    when user_question.match(/what's\sup/i) || user_question.match(/what's\sgoing\son/i) || user_question.match(/what\sare\syou\sup\sto/i)
+    when user_question.match(/what's\sup/i) || user_question.match(/what's\sgoing\son/i) || user_question.match(/what\sare\syou\sup\sto/i) || user_question.match(/\bsup/i)
       "what is up"
     when user_question.match(/how\sare\syou/i) || user_question.match(/how\sare\su/i) || user_question.match(/how\sr\su/i)
       "how are you"

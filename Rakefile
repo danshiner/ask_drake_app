@@ -10,7 +10,3 @@ namespace :db do
     puts "Current version: #{ActiveRecord::Migrator.current_version}"
   end
 end
-
-
-# require evnviro in the rake file
-# create rake command db:seed in call you call a seed.rb

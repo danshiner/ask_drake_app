@@ -2,7 +2,6 @@ require 'rubygems'
 require 'chatterbot/dsl'
 require 'net/http'
 
-
 verbose
 
 use_streaming

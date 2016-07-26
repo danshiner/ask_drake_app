@@ -24,6 +24,14 @@ class User < ActiveRecord::Base
     end
   end
 
+  def platform
+    if self.phone_number != nil
+      :twilio
+    elsif self.twitter_username != nil
+      :twitter
+    end 
+  end
+
   def set_defaults
     if self.new_record?
       self.credits = @@CREDITS

@@ -1,4 +1,4 @@
-class Sender(question)
+class Sender
 
   class << self
 
@@ -7,7 +7,8 @@ class Sender(question)
       @draketip = question.answer
 
       # Send the message, based on the platform of the advice request
-      case question.platform
+
+      case question.user.platform
       when :twilio
         puts @draketip.lyric.lyric
         # account_sid = 'AC6533ddc2b095658337840937b068c062'
@@ -24,8 +25,13 @@ class Sender(question)
       end
     end
 
-    def reject
+    def reject(question)
       puts "User #{question.user.id} does not have sufficient credits to receive a draketip."
+    end
+
+    # Determine if the user meets the criteria to receive a draketip. As of 07/2016, this is based on having a positive number of credits.
+    def user_meets_criteria?(user)
+      user.credits > 0
     end
 
   end

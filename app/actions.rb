@@ -15,6 +15,6 @@ post '/receive_sms' do #Change to receive question for production
   @advice_request = AdviceRequest.new(@incoming_question, @identifier, :twilio)
 
   # Check if the user meets criteria for response; if yes respond, if not, reject.
-  @advice_request.user_meets_criteria? ? Sender.respond(@advice_request) : Sender.reject
+  @advice_request.user_meets_criteria? ? Sender.respond(@advice_request) : Sender.reject(@advice_request)
 
 end

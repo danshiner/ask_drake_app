@@ -17,11 +17,14 @@ home_timeline do |tweet|
   puts asker
   puts question
 
+  # Set the user
+  @user = User.set_user(@identifier, :twilio)
+
   # Create a new advice request
-  @advice_request = AdviceRequest.new(@incoming_question, @identifier, :twitter)
+  @question = Question.create(question: @incoming_question, user_id: @user.id)
 
   # Check if the user meets criteria for response; if yes respond, if not, reject.
-  @advice_request.user_meets_criteria? ? Sender.respond(@advice_request) : Sender.reject
+  @question.user_meets_criteria? ? Sender.reply(@question) : Sender.reject(@question)
 
   # THE BELOW WORKS BUT HOPING I CAN REMOVE IT AND JUST USE THE ABOVE:
   # # Get the asker's twitter username and put it in the reply

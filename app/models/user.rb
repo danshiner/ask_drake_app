@@ -24,4 +24,9 @@ class User < ActiveRecord::Base
     end
   end
 
+  def remove_credits
+    self.credits -= 1
+    self.save
+  end
+
 end

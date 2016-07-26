@@ -27,7 +27,15 @@ configure do
   set :session_secret, ENV['SESSION_KEY'] || 'lighthouselabssecret'
 
   set :views, File.join(Sinatra::Application.root, "app", "views")
+
+  # Load all services from app/services, using autoload instead of require
+  # See http://www.rubyinside.com/ruby-techniques-revealed-autoload-1652.html
+  Dir[APP_ROOT.join('app', 'services', '*.rb')].each do |model_file|
+    filename = File.basename(model_file).gsub('.rb', '')
+    autoload ActiveSupport::Inflector.camelize(filename), model_file
+  end
 end
+
 
 # Development and Test Sinatra Configuration
 configure :development, :test do

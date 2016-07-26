@@ -5,6 +5,26 @@ class DrakeTip < ActiveRecord::Base
 
   # validates :user_id, :lyric_id,
   #   presence: { message: "Foreign keys required" }
+  def self.make (user, question)
+    draketip = self.create
+
+    # Attach users foreign key
+    draketip.user_id = user.id
+
+    # Attach lyric foreign key: determine keyword, look up lyric, attach lyrics foreign key
+    keyword = draketip.determine_keywords(question)
+    lyric = draketip.get_lyric(keyword)
+    draketip.lyric_id = lyric.id
+
+    # Render image, store url
+    image = draketip.image_render(lyric.lyric)
+    draketip.img_url = "https://hotlineping.herokuapp.com/draketips/draketip_#{100000+draketip.id}.png"
+
+    # Save and return draketip; add draketip_id to questions database
+    draketip.save
+    draketip
+
+  end
 
   def determine_keywords(user_question)
 

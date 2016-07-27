@@ -19,7 +19,7 @@ GEM
     buftok (0.2.0)
     builder (3.2.2)
     byebug (9.0.5)
-    chatterbot (2.0.2)
+    chatterbot (2.0.3)
       colorize (>= 0.7.3)
       launchy (>= 2.4.2)
       oauth (~> 0.4.7)
@@ -62,7 +62,7 @@ GEM
     pry-byebug (3.4.0)
       byebug (~> 9.0)
       pry (~> 0.10)
-    puma (3.5.2)
+    puma (3.6.0)
     rack (1.6.4)
     rack-protection (1.5.3)
       rack

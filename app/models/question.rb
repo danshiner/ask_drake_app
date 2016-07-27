@@ -6,17 +6,20 @@ class Question < ActiveRecord::Base
   validates :user_id,
     presence: { message: "User_id required" }
 
-  # def initialize(question, user_id, drake_tip_id)
-  #   self.question = question
-  #   self.user_id = user_id
-  #   self.drake_tip_id = drake_tip_id
-  # end
+  def answer
+    # Create the draketip
+    
+    draketip = DrakeTip.make(self.user, self.question)
 
-  # before_save :truncate_columns     ADD LATER IF YOU HAVE TIME!
+    # Store the question to the database
+    self.drake_tip_id = draketip.id
+    self.save
 
-  # def truncate_col
-  #   column_size = Question.columns_hash['question'].limit
-  #   self.question = self.question.truncate(column_size)
-  # end
+    # Remove a credit from the user
+    self.user.remove_credits
+
+    # Return the draketip
+    draketip
+  end
 
 end

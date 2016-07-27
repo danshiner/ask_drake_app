@@ -16,7 +16,6 @@ use_streaming
 home_timeline do |tweet|
   # check if tweet is a mention of the bot
   next if tweet.text !~ /@647hotlineping/i
-  binding.pry
   @tweet = tweet
 
   # Get the name of the asker

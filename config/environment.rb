@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'bundler/setup'
 require 'active_support/all'
+require 'pry-byebug'
 
 # Load Sinatra Framework (with AR)
 require 'sinatra'

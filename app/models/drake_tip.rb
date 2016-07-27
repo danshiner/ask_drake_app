@@ -23,11 +23,9 @@ class DrakeTip < ActiveRecord::Base
     # Save and return draketip; add draketip_id to questions database
     draketip.save
     draketip
-
   end
 
   def determine_keywords(user_question)
-
     case
     # Special situations
     when user_question.match(/toronto/i) || user_question.match(/the\s6/i) || user_question.match(/the\s6/i) || user_question.match(/the\ssix/i)
@@ -44,6 +42,8 @@ class DrakeTip < ActiveRecord::Base
       "pokemon"
     when user_question.match(/what's\sup/i) || user_question.match(/what's\sgoing\son/i) || user_question.match(/what\sare\syou\sup\sto/i) || user_question.match(/\bsup/i)
       "what is up"
+    when user_question.match(/how\solds\are/i)
+      "age"
     when user_question.match(/how\sare\syou/i) || user_question.match(/how\sare\su/i) || user_question.match(/how\sr\su/i)
       "how are you"
     # Main question words
@@ -88,7 +88,6 @@ class DrakeTip < ActiveRecord::Base
 
   # Turn into image
   def image_render(lyric)
-
     # 1. Read background image (#read returns an array, so gets the .first item in it)
     if lyric == "Golden ping unlocked! You will be contacted shortly to receive unlimited pings. Versace Versace Versace!"
       background = Magick::Image.read("./app/assets/background_gold.png").first
@@ -122,12 +121,6 @@ class DrakeTip < ActiveRecord::Base
     merged_step1 = background.composite(advice, 25, 25, Magick::OverCompositeOp)
     merged_step2 = merged_step1.composite(counter, 25, 475, Magick::OverCompositeOp)
     merged_step2.write("./public/draketips/draketip_#{100000+self.id}.png")
-
   end
-
-  # def remove_credit_from_user
-  #   self.user.credits -= 1
-  #   self.user.save!
-  # end
 
 end

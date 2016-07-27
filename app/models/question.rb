@@ -8,6 +8,7 @@ class Question < ActiveRecord::Base
 
   def answer
     # Create the draketip
+    
     draketip = DrakeTip.make(self.user, self.question)
 
     # Store the question to the database
@@ -20,7 +21,5 @@ class Question < ActiveRecord::Base
     # Return the draketip
     draketip
   end
-
-
 
 end

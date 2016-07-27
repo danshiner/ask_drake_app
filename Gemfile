@@ -13,6 +13,7 @@ gem 'tux'
 gem 'twilio-ruby'
 gem 'rmagick'
 gem 'chatterbot'
+gem 'pry-byebug'
 
 # These gems are only installed when run as `bundle install --without production`
 group :development, :test do

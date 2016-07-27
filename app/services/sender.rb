@@ -2,12 +2,12 @@ class Sender
 
   class << self
 
-    def reply(question)
+    # Reply class, which produces and then sends the draketip. Takes an optional tweet class because to send over twitter must pass the tweet as well.
+    def reply(question, tweet=nil)
       # Answer the question
       @draketip = question.answer
 
       # Send the message, based on the platform of the advice request
-
       case question.user.platform
       when :twilio
         puts @draketip.lyric.lyric
@@ -15,13 +15,14 @@ class Sender
         # auth_token = '6a02e4987794c0ac52e40b35e1bf699a'
         # client = Twilio::REST::Client.new(account_sid, auth_token)
         # client.messages.create(
-        #   to: advice_request.user.phone_number,
+        #   to: question.user.phone_number,
         #   from: "+1647722DRIZ",
+        #   body: "#{question.user.credits} pings remaining. Use them wisely.",
         #   media_url: @draketip.img_url
         # )
       when :twitter
         message = replace_variables("#USER#", tweet)
-        client.update_with_media message, File.open("./public/draketips/draketip_medium.png"), in_reply_to_status_id:tweet.id
+        client.update_with_media message, File.open("./public/draketips/draketip_#{100000+@draketip.id}.png"), in_reply_to_status_id:tweet.id
       end
     end
 

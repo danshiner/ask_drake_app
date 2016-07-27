@@ -7,8 +7,7 @@ class User < ActiveRecord::Base
   has_many :drake_tips
 
   validates :phone_number,
-    presence: { message: "Phone number required." },
-    format: { with: /1\d{10}/, message: "Phone number not formatted correctly - must be 1##########" },
+    format: { with: /1\d{10}/, message: "Phone number not formatted correctly - must be 1##########", if: :phone_number_present? },
     uniqueness: true
 
   after_initialize :set_defaults
@@ -29,7 +28,7 @@ class User < ActiveRecord::Base
       :twilio
     elsif self.twitter_username != nil
       :twitter
-    end 
+    end
   end
 
   def set_defaults
@@ -44,4 +43,7 @@ class User < ActiveRecord::Base
     self.save
   end
 
+  def phone_number_present?
+    self.phone_number.present?
+  end
 end

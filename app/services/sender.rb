@@ -3,7 +3,7 @@ class Sender
   class << self
 
     # Reply class, which produces and then sends the draketip. Takes an optional tweet class because to send over twitter must pass the tweet as well.
-    def reply(question, tweet=nil)
+    def reply(question, client=nil, tweet=nil)
       # Answer the question
       @draketip = question.answer
 
@@ -17,7 +17,7 @@ class Sender
         client.messages.create(
           to: question.user.phone_number,
           from: "+1647722DRIZ",
-          # body: "#{question.user.credits} pings remaining. Use them wisely.",
+          body: "pings remaining: #{question.user.credits}",
           media_url: @draketip.img_url
         )
       when :twitter

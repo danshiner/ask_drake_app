@@ -16,7 +16,7 @@ use_streaming
 home_timeline do |tweet|
   # check if tweet is a mention of the bot
   next if tweet.text !~ /@647hotlineping/i
-
+  binding.pry
   @tweet = tweet
 
   # Get the name of the asker
@@ -33,7 +33,7 @@ home_timeline do |tweet|
   @question = Question.create(question: @incoming_question, user_id: @user.id)
 
   # Check if the user meets criteria for response; if yes respond, if not, reject.
-  Sender.user_meets_criteria?(@user) ? Sender.reply(@question, @tweet) : Sender.reject(@question)
+  Sender.user_meets_criteria?(@user) ? Sender.reply(@question, client, @tweet) : Sender.reject(@question)
 
   # Note: new (unreleased) behaviour will allow easier media posting: this is in the github but not posted.
   # reply "#USER#", tweet, {media: File.open("../public/draketips/draketip_#{100000}.png")}

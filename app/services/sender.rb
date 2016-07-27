@@ -11,15 +11,15 @@ class Sender
       case question.user.platform
       when :twilio
         puts @draketip.lyric.lyric
-        # account_sid = 'AC6533ddc2b095658337840937b068c062'
-        # auth_token = '6a02e4987794c0ac52e40b35e1bf699a'
-        # client = Twilio::REST::Client.new(account_sid, auth_token)
-        # client.messages.create(
-        #   to: question.user.phone_number,
-        #   from: "+1647722DRIZ",
-        #   body: "#{question.user.credits} pings remaining. Use them wisely.",
-        #   media_url: @draketip.img_url
-        # )
+        account_sid = 'AC6533ddc2b095658337840937b068c062'
+        auth_token = '6a02e4987794c0ac52e40b35e1bf699a'
+        client = Twilio::REST::Client.new(account_sid, auth_token)
+        client.messages.create(
+          to: question.user.phone_number,
+          from: "+1647722DRIZ",
+          body: "#{question.user.credits} pings remaining. Use them wisely.",
+          media_url: @draketip.img_url
+        )
       when :twitter
         message = replace_variables("#USER#", tweet)
         client.update_with_media message, File.open("./public/draketips/draketip_#{100000+@draketip.id}.png"), in_reply_to_status_id:tweet.id

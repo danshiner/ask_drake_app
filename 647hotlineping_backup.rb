@@ -56,7 +56,7 @@ exit
 # Enabling **debug_mode** prevents the bot from actually sending
 # tweets. Keep this active while you are developing your bot. Once you
 # are ready to send out tweets, you can remove this line.
-debug_mode
+# debug_mode
 
 # Chatterbot will keep track of the most recent tweets your bot has
 # handled so you don't need to worry about that yourself. While
@@ -134,7 +134,7 @@ use_streaming
 #
 # this block handles incoming Direct Messages. if you want to do
 # something with DMs, go for it!
-# 
+#
 # direct_messages do |dm|
 #  puts "DM received: #{dm.text}"
 #  direct_message "HELLO, I GOT YOUR MESSAGE", dm.sender
@@ -187,4 +187,3 @@ use_streaming
 #deleted do |tweet|
 #
 #end
-  

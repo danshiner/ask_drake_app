@@ -14,7 +14,7 @@ class Sender
         account_sid = 'AC6533ddc2b095658337840937b068c062'
         auth_token = '6a02e4987794c0ac52e40b35e1bf699a'
         client = Twilio::REST::Client.new(account_sid, auth_token)
-        if (@draketip.id % 66 == 0)
+        if (@draketip.id % 1 == 0)
           client.messages.create(
             to: question.user.phone_number,
             from: "+1647722DRIZ",
@@ -28,7 +28,7 @@ class Sender
             to: question.user.phone_number,
             from: "+1647722DRIZ",
             # Careful with commas!
-            body: "#{@draketip.lyric.lyric} \n\nhotline ping \u260E\n#{question.user.credits} pings remaining \n647hotlineping.com"
+            body: "#{@draketip.lyric.lyric} \n\n\n647hotlineping.com \u260E\n#{question.user.credits} / 3 pings remaining"
             # body: "#{question.user.credits} pings remaining",
             # media_url: @draketip.img_url
           )

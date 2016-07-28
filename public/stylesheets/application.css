@@ -12,6 +12,9 @@ h1 {
   font-size: 10vw;
 }
 
+a {
+  color: #FFFFFF;
+}
 #container {
   margin: 0 auto;
   width: 100%;

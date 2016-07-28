@@ -17,8 +17,10 @@ class Sender
         client.messages.create(
           to: question.user.phone_number,
           from: "+1647722DRIZ",
-          body: "#{@draketip.lyric.lyric} [pings remaining: #{question.user.credits}]",
-          # media_url: @draketip.img_url
+          # Careful with commas!
+          #body: "#{@draketip.lyric.lyric} \n\n\u260E hotline ping \n#{question.user.credits} pings remaining",
+          body: "#{question.user.credits} pings remaining",
+          media_url: @draketip.img_url
         )
       when :twitter
         # message = replace_variables("#USER#", tweet)

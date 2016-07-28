@@ -71,7 +71,7 @@ class DrakeTip < ActiveRecord::Base
       "why"
     when user_question.match(/^should/i)
       "should"
-    when user_question.match(/^will/i)
+    when user_question.match(/^will/i) || user_question.match(/^is/i) || user_question.match(/^are/i)
       "will"
     when user_question.match(/how/i)
       "how"

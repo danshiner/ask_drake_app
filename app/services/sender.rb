@@ -21,8 +21,8 @@ class Sender
           media_url: @draketip.img_url
         )
       when :twitter
-        message = replace_variables("#USER#", tweet)
-        client.update_with_media message, File.open("./public/draketips/draketip_#{100000+@draketip.id}.png"), in_reply_to_status_id:tweet.id
+        # message = replace_variables("#USER#", tweet)
+        # client.update_with_media message, File.open("./public/draketips/draketip_#{100000+@draketip.id}.png"), in_reply_to_status_id:tweet.id
       end
     end
 

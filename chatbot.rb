@@ -10,7 +10,7 @@ require 'chatterbot/dsl'
 require 'net/http'
 
 verbose
-debug_mode
+# debug_mode
 use_streaming
 
 home_timeline do |tweet|

@@ -1,0 +1,16 @@
+body {
+  line-height: 1;
+  background-color: #fcadc3;
+  color: #FFFFFF;
+}
+
+h1 {
+  font-family: "HelveticaNeueBold", "HelveticaNeue-Bold", "Helvetica Neue Bold", "HelveticaNeue", "Helvetica Neue", 'TeXGyreHerosBold', "Helvetica", "Tahoma", "Geneva", "Arial", sans-serif; font-weight:600; font-stretch:normal;
+  font-style: italic;
+  margin: 3px 0 3px 0;
+  font-size: calc(4vw + 4vh + 2vmin);
+}
+
+#container {
+  margin: 0 auto;
+}

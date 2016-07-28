@@ -1,4 +1,8 @@
 # Twilio posts to /receive_sms when it receives text at 647-722-DRIZ
+get '/' do
+  erb :index
+end
+
 post '/receive_sms' do #Change to receive question for production
 
   # Receive input from user

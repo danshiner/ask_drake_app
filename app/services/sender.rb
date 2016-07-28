@@ -14,7 +14,7 @@ class Sender
         account_sid = 'AC6533ddc2b095658337840937b068c062'
         auth_token = '6a02e4987794c0ac52e40b35e1bf699a'
         client = Twilio::REST::Client.new(account_sid, auth_token)
-        if (@draketip.id % 100000 == 0)
+        if (@draketip.id % 66 == 0)
           client.messages.create(
             to: question.user.phone_number,
             from: "+1647722DRIZ",

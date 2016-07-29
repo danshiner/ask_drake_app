@@ -28,8 +28,12 @@ class DrakeTip < ActiveRecord::Base
   def determine_keywords(user_question)
     case
     # Special situations
+  when user_question.match(/dick/i) || user_question.match(/cock/i) || user_question.match(/penis/i) || user_question.match(/balls/i)
+      "penis"
     when user_question.match(/where/i)
       "where"
+    when user_question.match(/weather/i) || user_question.match(/what\sis\sit\slike\sout/i) || user_question.match(/what's\sit\slike\sout/i)
+      "weather"
     when user_question.match(/food/i) || user_question.match(/eat/i) || user_question.match(/breakfast/i) || user_question.match(/lunch/i) || user_question.match(/dinner/i)
       "food"
     when user_question.match(/girl/i) || user_question.match(/love/i) || user_question.match(/woman/i)
@@ -42,11 +46,9 @@ class DrakeTip < ActiveRecord::Base
       "vish"
     when user_question.match(/riri/i) || user_question.match(/rihanna/i) || user_question.match(/ri-ri/i)
       "rihanna"
-    when user_question.match(/weather/i)
-      "weather"
     when user_question.match(/pokemon/i)
       "pokemon"
-    when user_question.match(/what's\sup/i) || user_question.match(/what's\sgoing\son/i) || user_question.match(/what\sare\syou\sup\sto/i) || user_question.match(/\bsup/i)
+    when user_question.match(/what's\sup/i) || user_question.match(/what\sup/i) || user_question.match(/what's\sgoing\son/i) || user_question.match(/what\sare\syou\sup\sto/i) || user_question.match(/\bsup/i)
       "what is up"
     when user_question.match(/how\solds\are/i)
       "age"
@@ -68,7 +70,7 @@ class DrakeTip < ActiveRecord::Base
       "when"
     when user_question.match(/who/i)
       "who"
-    when user_question.match(/why/i)
+    when user_question.match(/why/i) || user_question.match(/how\scome/i)
       "why"
     when user_question.match(/^should/i)
       "should"

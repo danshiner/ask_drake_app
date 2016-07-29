@@ -78,7 +78,7 @@ class DrakeTip < ActiveRecord::Base
       "how"
     when user_question.match(/^I was wishing for some things$/i)
       "gold"
-    when user_question.match(/the\ssix/i) || user_question.match(/the\s6ix/i) || user_question.match(/toronto/i) user_question.match(/t-dot/i)
+    when user_question.match(/the\ssix/i) || user_question.match(/the\s6ix/i) || user_question.match(/toronto/i) || user_question.match(/t-dot/i)
       "toronto"
     else
       "non-question"

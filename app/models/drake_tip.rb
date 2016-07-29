@@ -30,8 +30,6 @@ class DrakeTip < ActiveRecord::Base
     # Special situations
     when user_question.match(/where/i)
       "where"
-    when user_question.match(/toronto/i) || user_question.match(/the\s6/i) || user_question.match(/the\s6/i) || user_question.match(/the\ssix/i)
-      "toronto"
     when user_question.match(/food/i) || user_question.match(/eat/i) || user_question.match(/breakfast/i) || user_question.match(/lunch/i) || user_question.match(/dinner/i)
       "food"
     when user_question.match(/girl/i) || user_question.match(/love/i) || user_question.match(/woman/i)
@@ -52,6 +50,7 @@ class DrakeTip < ActiveRecord::Base
       "age"
     when user_question.match(/how\sare\syou/i) || user_question.match(/how\sare\su/i) || user_question.match(/how\sr\su/i)
       "how are you"
+
     # Main question words
     when user_question.match(/what\sis/i)
       "what is"
@@ -81,6 +80,7 @@ class DrakeTip < ActiveRecord::Base
       "non-question"
     end
   end
+
 
   # Determine advice
   def get_lyric(keyword)

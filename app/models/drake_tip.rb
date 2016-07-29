@@ -28,6 +28,8 @@ class DrakeTip < ActiveRecord::Base
   def determine_keywords(user_question)
     case
     # Special situations
+    when user_question.match(/where/i)
+      "where"
     when user_question.match(/toronto/i) || user_question.match(/the\s6/i) || user_question.match(/the\s6/i) || user_question.match(/the\ssix/i)
       "toronto"
     when user_question.match(/food/i) || user_question.match(/eat/i) || user_question.match(/breakfast/i) || user_question.match(/lunch/i) || user_question.match(/dinner/i)
@@ -61,8 +63,6 @@ class DrakeTip < ActiveRecord::Base
       "what should"
     when user_question.match(/what/i)
       "what"
-    when user_question.match(/where/i)
-      "where"
     when user_question.match(/when/i)
       "when"
     when user_question.match(/who/i)

@@ -40,6 +40,8 @@ class DrakeTip < ActiveRecord::Base
       "vishal"
     when user_question.match(/vish/i)
       "vish"
+    when user_question.match(/riri/i) || user_question.match(/rihanna/i) || user_question.match(/ri-ri/i)
+      "rihanna"
     when user_question.match(/weather/i)
       "weather"
     when user_question.match(/pokemon/i)
@@ -48,7 +50,7 @@ class DrakeTip < ActiveRecord::Base
       "what is up"
     when user_question.match(/how\solds\are/i)
       "age"
-    when user_question.match(/how\sare\syou/i) || user_question.match(/how\sare\su/i) || user_question.match(/how\sr\su/i)
+    when user_question.match(/how\sare\syou/i) || user_question.match(/how\sare\su/i) || user_question.match(/how\sr\su/i) || user_question.match(/how's/i) || user_question.match(/how\sis/i)
       "how are you"
 
     # Main question words
@@ -70,12 +72,14 @@ class DrakeTip < ActiveRecord::Base
       "why"
     when user_question.match(/^should/i)
       "should"
-    when user_question.match(/^will/i) || user_question.match(/^is/i) || user_question.match(/^are/i)
+    when user_question.match(/^will/i) || user_question.match(/^is/i) || user_question.match(/^are/i) || user_question.match(/^does/i) || user_question.match(/^can/i)
       "will"
     when user_question.match(/how/i)
       "how"
     when user_question.match(/^I was wishing for some things$/i)
       "gold"
+    when user_question.match(/the\ssix/i) || user_question.match(/the\s6ix/i) || user_question.match(/toronto/i) user_question.match(/t-dot/i)
+      "toronto"
     else
       "non-question"
     end

@@ -32,7 +32,7 @@ class DrakeTip < ActiveRecord::Base
       "penis"
     when user_question.match(/weather/i) || user_question.match(/what\sis\sit\slike\sout/i) || user_question.match(/what's\sit\slike\sout/i) || user_question.match(/forecast/i)
       "weather"
-    when user_question.match(/food/i) || user_question.match(/eat/i) || user_question.match(/breakfast/i) || user_question.match(/lunch/i) || user_question.match(/dinner/i)
+    when user_question.match(/food/i) || user_question.match(/\seat/i) || user_question.match(/breakfast/i) || user_question.match(/lunch/i) || user_question.match(/dinner/i)
       "food"
     when user_question.match(/girl/i) || user_question.match(/love/i) || user_question.match(/woman/i)
       "love"

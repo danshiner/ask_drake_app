@@ -28,11 +28,9 @@ class DrakeTip < ActiveRecord::Base
   def determine_keywords(user_question)
     case
     # Special situations
-  when user_question.match(/dick/i) || user_question.match(/cock/i) || user_question.match(/penis/i) || user_question.match(/balls/i)
+    when user_question.match(/dick/i) || user_question.match(/cock/i) || user_question.match(/penis/i) || user_question.match(/balls/i)
       "penis"
-    when user_question.match(/where/i)
-      "where"
-    when user_question.match(/weather/i) || user_question.match(/what\sis\sit\slike\sout/i) || user_question.match(/what's\sit\slike\sout/i)
+    when user_question.match(/weather/i) || user_question.match(/what\sis\sit\slike\sout/i) || user_question.match(/what's\sit\slike\sout/i) || user_question.match(/forecast/i)
       "weather"
     when user_question.match(/food/i) || user_question.match(/eat/i) || user_question.match(/breakfast/i) || user_question.match(/lunch/i) || user_question.match(/dinner/i)
       "food"
@@ -56,6 +54,8 @@ class DrakeTip < ActiveRecord::Base
       "how are you"
 
     # Main question words
+    when user_question.match(/where/i)
+      "where"
     when user_question.match(/what\sis/i)
       "what is"
     when user_question.match(/what\swas/i)
@@ -76,6 +76,8 @@ class DrakeTip < ActiveRecord::Base
       "should"
     when user_question.match(/^will/i) || user_question.match(/^is/i) || user_question.match(/^are/i) || user_question.match(/^does/i) || user_question.match(/^can/i)
       "will"
+    when user_question.match(/how\smany/i)
+      "how many"
     when user_question.match(/how/i)
       "how"
     when user_question.match(/^I was wishing for some things$/i)

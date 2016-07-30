@@ -14,7 +14,23 @@ class Sender
         account_sid = 'AC6533ddc2b095658337840937b068c062'
         auth_token = '6a02e4987794c0ac52e40b35e1bf699a'
         client = Twilio::REST::Client.new(account_sid, auth_token)
-        if (@draketip.id % 1 == 0)
+        if (@draketip.id % 1000 == 0)
+          # Alert me every 1000 pings sent to keep track of costs.
+          client.messages.create(
+            to: "+16479877685",
+            from: "+1647722DRIZ",
+            # Careful with commas!
+            body: "#{@draketip.id} draketips sent. That means $30."
+            # body: "#{question.user.credits} pings remaining",
+            # media_url: @draketip.img_url
+          )
+          client.messages.create(
+            to: question.user.phone_number,
+            from: "+1647722DRIZ",
+            body: "#{question.user.credits} pings remaining",
+            media_url: @draketip.img_url
+          )
+        elsif (@draketip.id % 1 == 0)
           client.messages.create(
             to: question.user.phone_number,
             from: "+1647722DRIZ",
